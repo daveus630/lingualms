@@ -1,0 +1,29 @@
+<div
+  class="d-flex flex-column flex-md-row align-items-center p-1 px-md-4 mb-2 bg-white border-bottom shadow-sm fixed-top">
+  <h5 class="my-0 mr-md-auto font-weight-normal"><a class="navbar-brand" routerLink="/gtech/dashboard"><img
+        src="../../assets/images/gTech_logo.png" width="60" height="60" alt="gTech Logo"></a></h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark nav-link" routerLink="/gtech/dashboard" routerLinkActive="active"
+      *ngIf="authService.isAuthenticated" data-toggle="tab" role="tab" aria-controls="home"
+      aria-selected="true">Home</a>
+    <a class="p-2 text-dark nav-link" routerLink="/gtech/myteams" routerLinkActive="active"
+      *ngIf="authService.isAuthenticated" data-toggle="tab" role="tab" aria-controls="MyTeams" aria-selected="false">My
+      Team</a>
+    <a class="p-2 text-dark nav-link" routerLink="/gtech/requests" routerLinkActive="active"
+      *ngIf="authService.isAuthenticated" data-toggle="tab" role="tab" aria-controls="requests"
+      aria-selected="false">Requests</a>
+    <a class="p-2 text-dark nav-link" routerLink="/gtech/admin" routerLinkActive="active"
+      *ngIf="authService.isAuthenticated && isRoleAdmin" data-toggle="tab" role="tab" aria-controls="admin"
+      aria-selected="false">Admin</a>
+  </nav>
+  <a (click)="onUtilLink()" class="mr-1 image" data-toggle="tooltip" data-placement="bottom" title="Go to Utilization Page"><img
+      src="../../assets/images/Utilization_Logo.png" alt="Utilization Link" class="image" width="160" height="25"></a>
+  <div class="dropdown">
+    <img src={{authService.image}} class="rounded-circle my-2 my-sm-0 image" alt="Profile Image" width="40" height="40"
+      *ngIf="authService.isAuthenticated" id="logOutDropdownMenu" role="button" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+    <div class="dropdown-menu" aria-labelledby="logOutDropdownMenu">
+      <a class="dropdown-item" (click)="authService.googleLogout()">Log Out</a>
+    </div>
+  </div>
+</div>

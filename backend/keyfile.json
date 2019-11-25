@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "lingua-leave-management-system",
+    "private_key_id": "dde00972e9dd86e860d294cef2b75506dc410f11",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCc18LHznuWL0CJ\neeeCzDAGrGBexZp7qO30r2P2cnWO+FsxJ7gRZ8tt8dyG9GkH6Tv2yVG28A65ksJ4\nMfslFXxButHs34+ygAuxcZwc/aS7rGAhrT1c162gSh3HIUgDY35xQAz9cBFpcwrb\nJDIk6AEQBXKXWz1DM86hfSlifzUcVTLltw7dHtZybHMKmD3Zci5Gg7/cCIdHUjeF\nO03lLw09UtKG+vluLQZdpKk45gTZEFix8vO4OlbMntTEhGujvuJy/fm8rj0XVwId\nZVgjUHZXEgs1zxj9taBTvtdNIHct1AWQOSFDmbW5SlgKvB71RS7fEAnVMAuXzbCC\n0/+XnJQzAgMBAAECggEAL/2g/uxCSoj40Vf4q7/4rgIOltEV3OKqtOT5zE3nhLCf\njqHdo43D5EdOOAkPHjmSfIfLNhOsHcI3OPnqI8W4OJCGbVlWqcKeUVQ29XPy9O3g\nmE1e6kqgONyU0fpwA4FtDhAQKXgiC8cEulsP8NUAhjt0fbWQQEDY5/bZM+dChAFf\nKWnIU5QEuz6tq619SJ/YisjdC/csTsnKC5N9GzX7Nu7t4qFAqXXzOd7kBFnW92/i\nbg46K0CFzRVR08xh7qxAE4+pp/MKhBF5veTJFeCa9ixEoKTkR9zuD2+v6BECPC0h\nrsBFdwOIjpdgVW4caji8gFyGUOcPy3X3F+rmPnSAyQKBgQDJ6VHCFply2jTH3JMn\nN3udg+Gp5GbmMTFEORMNqHe0RDYFQ4Wy5IRAk3gRjcvnPu7QprRX9p9vzlgHA5Ll\nRIkr4ccvcxUqU1q2r6OTufZDlNhQNnWFQc5Q6uUmgXL8WDlvhBgbyWzA1HIzk1j8\nZnSayw6UaR8NshofN9oTd4dU7QKBgQDG27pQKqrQxHw8oglqqHwpS5IXiiviJLGU\nl+elOK5URrdZ88uijBO4BG//z8s3dnoa1IHydT3mbH+GY6iLTIfUDztycsxZXHBx\nlQTXSMOmHduvRDd+DCLgzH5YI0ExfYnDGcbQGScaOHnxHEuBvPmtH8aZFdoDAoSK\n7I7JXwyJnwKBgHOzyxEQiEBDgGljIcQgTCr4LvF/G+QfHl884Yk7F9VqHRapGc1o\nm8yxdOWCPu01p/5S+RdLERQtx03Fo4DT5FMMH2s2ZFOLznjPb0oxD0is28QjYPbK\nveKqqEOHfI/UMp2PsY0CwNpDI2ogrqZ8Q6eMYr9y+cOMYuGuzL3JCfkFAoGAK/FO\nIHztNijVE0jzL8B/f1iVteHwhI57N0zCAX6e9zyRM61t6ENv8A/699phG6ZwoREo\njf1eala7b2UCT5Xfxfp/tnCru2tz5YV6hmAr679ZVkeKw63G30oQ+UUBGQCWuqgt\niLqmK2MjfyYzgT3TJnCJIDb18AhUZaaUfuckDB0CgYAT5Fsw1STO7wy15tEzRmfz\nkDYpZGb3VWWZmUZWpwlIeflf2C5aCKFSEvBwxrLrhqiYUoA1j52ZzlkiUjDoGzR6\n1HSvG2YfJKnoekeIeKuzd5eT4HN3lIWPSNgu+S1EQV3XFfbf2riz1Qwd42T57Ths\nTenKUEmxWBAWMA80BFDVSQ==\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-rwfq2@lingua-leave-management-system.iam.gserviceaccount.com",
+    "client_id": "101811221176917031913",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-rwfq2%40lingua-leave-management-system.iam.gserviceaccount.com"
+  }

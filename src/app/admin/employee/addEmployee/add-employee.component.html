@@ -1,0 +1,172 @@
+<form [formGroup]="addEmployeeForm">
+  <div class=" form-group row">
+    <label for="inputFirstName" class="col col-form-label required">First Name</label>
+    <div class="col">
+      <input type="text" class="form-control" id="inputFirstName" formControlName="fname"
+        [ngClass]="{'is-savedForm': savedForm && f.fname.errors}" placeholder="Given Name">
+      <div *ngIf="(!!f.fname.invalid && savedForm) || (!!f.fname.invalid && (!!f.fname.dirty || !!f.fname.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.fname.errors.required">
+          First Name is required.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputLastName" class="col col-form-label required">Last Name</label>
+    <div class="col">
+      <input type="text" class="form-control" id="inputLastName" formControlName="lname"
+        [ngClass]="{'is-savedForm': savedForm && f.lname.errors}" placeholder="Last Name">
+      <div *ngIf="(!!f.lname.invalid && savedForm) || (!!f.lname.invalid && (!!f.lname.dirty || !!f.lname.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.lname.errors.required">Last Name is required.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputEmail" class="col col-form-label required">Email Address</label>
+    <div class="col">
+      <input type="email" class="form-control" id="inputEmail" formControlName="email"
+        [ngClass]="{'is-savedForm': savedForm && f.email.errors}" placeholder="ldap@google.com"
+        pattern="[a-z0-9._%+-]+@google+\.[a-z]{2,}$">
+      <div *ngIf="(!!f.email.invalid && savedForm) || (!!f.email.invalid && (!!f.email.dirty || !!f.email.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.email.errors.required">Ldap is required.</div>
+        <div *ngIf="!!f.email.errors">Invalid ldap</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputContact" class="col col-form-label required">Contact Number</label>
+    <div class="col">
+      <input type="tel" class="form-control" id="inputContact" formControlName="phone" pattern="^[+]\d{12}$"
+        [ngClass]="{'is-savedForm': savedForm && f.phone.errors}" placeholder="+639999999999">
+      <div *ngIf="(!!f.phone.invalid && savedForm) || (!!f.phone.invalid && (!!f.phone.dirty || !!f.phone.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.phone.errors.required">Contact number is required.</div>
+        <div *ngIf="!!f.phone.errors">Invalid mobile number format.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="roleControlSelect" class="col col-form-label required">Role</label>
+    <div class="col">
+      <select type="text" class="form-control" id="roleControlSelect" formControlName="role"
+        [ngClass]="{'is-savedForm': savedForm && f.role.errors}">
+        <option [value]="role" *ngFor="let role of roles">{{role}}</option>
+      </select>
+      <div *ngIf="(!!f.role.invalid && savedForm) || (!!f.role.invalid && (!!f.role.dirty || !!f.role.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.role.errors.required">Role is required.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="projectControlSelect" class="col col-form-label required">Project</label>
+    <div class="col">
+      <select type="text" class="form-control" id="projectControlSelect" formControlName="project"
+        [ngClass]="{'is-savedForm': savedForm && f.project.errors}">
+        <option value="selectProject" disabled="disabled">-- Select Project --</option>
+        <option [value]="project" *ngFor="let project of projectLists">{{project}}</option>
+      </select>
+      <div
+        *ngIf="(!!f.project.invalid && savedForm) || (!!f.project.invalid && (!!f.project.dirty || !!f.project.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.project.errors.required">Project Name is required.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="teamControlSelect" class="col col-form-label required">Team</label>
+    <div class="col">
+      <select type="text" class="form-control" id="teamControlSelect" formControlName="team"
+        [ngClass]="{'is-savedForm': savedForm && f.team.errors}">
+        <option value="selectTeam" disabled="disabled">-- Select Team --</option>
+        <option [value]="team" *ngFor="let team of teamLists">{{team}}</option>
+      </select>
+      <div *ngIf="(!!f.team.invalid && savedForm) || (!!f.team.invalid && (!!f.team.dirty || !!f.team.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.team.errors.required">Team is required.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="shiftControlSelect" class="col col-form-label required">Shift Schedule</label>
+    <div class="col">
+      <select type="text" class="form-control" id="shiftControlSelect" formControlName="shift"
+        [ngClass]="{'is-savedForm': savedForm && f.shift.errors}">
+        <option value="selectShift" disabled="disabled">-- Select Shift --</option>
+        <option [value]="shift" *ngFor="let shift of shiftSchedules">{{shift}}</option>
+      </select>
+      <div *ngIf="(!!f.shift.invalid && savedForm) || (!!f.shift.invalid && (!!f.shift.dirty || !!f.shift.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.shift.errors.required">Shift schdeule is required.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="supervisorControlSelect" class="col col-form-label required">Supervisor</label>
+    <div class="col">
+      <select type="text" class="form-control" id="supervisorControlSelect" formControlName="supervisor"
+        [ngClass]="{'is-savedForm': savedForm && f.supervisor.errors}">
+        <option value="selectOptions" disabled="disabled">-- Select Supervisor --</option>
+        <option [value]="supervisor.ldap" *ngFor="let supervisor of supervisors">
+          {{supervisor.name}}&nbsp;({{supervisor.ldap}})</option>
+      </select>
+      <div
+        *ngIf="(!!f.supervisor.invalid && savedForm) || (!!f.supervisor.invalid && (!!f.supervisor.dirty || !!f.supervisor.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.supervisor.errors.required">Supervisor Detail is required.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputAllowedSickLeave" class="col col-form-label required">Allowed Sick Leave</label>
+    <div class="col">
+      <input type="text" class="form-control" id="inputAllowedSickLeave" formControlName="allowedSl" readonly>
+      <div *ngIf="!!f.allowedSl.invalid && (!!f.allowedSl.dirty || !!f.allowedSl.touched)" class="alert alert-danger">
+        <div *ngIf="!!f.allowedSl.errors.required">Allowed Sick Leave is required.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputAllowedVacationLeave" class="col col-form-label required">Allowed Vacation Leave</label>
+    <div class="col">
+      <input type="text" class="form-control" id="inputAllowedVacationLeave" formControlName="allowedVl" readonly>
+      <div *ngIf="!!f.allowedVl.invalid && (!!f.allowedVl.dirty || !!f.allowedVl.touched)" class="alert alert-danger">
+        <div *ngIf="!!f.allowedVl.errors.required">Allowed Vacation Leave is required.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputAvailableSickLeave" class="col col-form-label required">Available Sick Leave</label>
+    <div class="col">
+      <input type="number" class="form-control" id="inputAvailableSickLeave" formControlName="availSl"
+        [ngClass]="{'is-savedForm': savedForm && f.availSl.errors}" min="0" max="117"
+        placeholder="Available Sick Leave in hours">
+      <div
+        *ngIf="(!!f.availSl.invalid && savedForm) || (!!f.availSl.invalid && (!!f.availSl.dirty || !!f.availSl.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.availSl.errors.required">Available Sick Leave is required.</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputAvailableVacationLeave" class="col col-form-label required">Available Vacation
+      Leave</label>
+    <div class="col">
+      <input type="number" class="form-control" id="inputAvailableVacationLeave" formControlName="availVl"
+        [ngClass]="{'is-savedForm': savedForm && f.availVl.errors}" min="0" max="135"
+        placeholder="Available Vacation Leave in hours">
+      <div
+        *ngIf="(!!f.availVl.invalid && savedForm) || (!!f.availVl.invalid && (!!f.availVl.dirty || !!f.availVl.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.availVl.errors.required">Available Vacation Leave is required.</div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="row modal-footer">
+  <button type="button" class="btn btn-primary mr-2" (click)="reset()">Reset</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!addEmployeeForm.valid" (click)="onSubmit()">Add</button>
+</div>

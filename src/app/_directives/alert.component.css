@@ -1,0 +1,17 @@
+.toast {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    opacity: 1;
+    border-radius: 0;
+    z-index:1000;
+}
+
+.success{
+    background-color: #28a745;
+    color: #fff;
+}
+
+.error{
+    background-color: #dc3545;
+    color: #fff;
+}

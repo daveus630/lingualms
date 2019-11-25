@@ -1,0 +1,9 @@
+.signIn {
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 12rem;
+  padding-bottom: 12rem;
+}

@@ -1,0 +1,33 @@
+<div class="jumbotron-admin">
+  <div class="tab-pane" id="employee" role="tabpanel" aria-labelledby="employee-tab">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-2 px-3 mb-3 border-bottom">
+      <h2 class="h2">Employee Information</h2>
+    </div>
+    <button type="button" class="btn btn-outline-primary float-right mb-2 mx-2" data-toggle="modal"
+      data-target="#addEmployeeModal" *ngIf="!loading else loadingAdd">Add Employee</button>
+    <app-modify-employee></app-modify-employee>
+  </div>
+</div>
+
+<!-- Add Employee Modal -->
+<div id="addEmployeeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addEmployeeModalTitle">Add Employee</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-add-employee (isLoading)="getLoadingValue($event)"></app-add-employee>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading Spinner Template -->
+<ng-template #loadingAdd>
+  <div class="lds-dual-ring float-right mb-2 mx-2"></div>
+</ng-template>

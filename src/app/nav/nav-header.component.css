@@ -1,0 +1,20 @@
+a:hover {
+  background-color: #f8f9fa;
+}
+.nav-link {
+  display: inline;
+  border-bottom: 0.25rem solid transparent;
+}
+a.nav-link.active {
+  color: #007bff !important;
+  border-bottom-color: #007bff !important;
+}
+.image {
+  cursor: pointer;
+}
+.dropdown-menu {
+  left: -4rem !important;
+}
+a.dropdown-item:hover{
+  background-color: rgb(108,117,125,0.2);
+}

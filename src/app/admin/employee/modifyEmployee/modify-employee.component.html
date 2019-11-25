@@ -1,0 +1,201 @@
+<div class="table-responsive" *ngIf="!isLoadingResults else loadingResultSpinner">
+  <table mat-table [dataSource]="dataSource" class="table table-striped mb-0">
+    <!-- Name Column -->
+    <ng-container matColumnDef="employeeName">
+      <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Contact Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Contact Number </th>
+      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+    </ng-container>
+
+    <!-- Project Column -->
+    <ng-container matColumnDef="project">
+      <th mat-header-cell *matHeaderCellDef> Project </th>
+      <td mat-cell *matCellDef="let element"> {{element.project}} </td>
+    </ng-container>
+
+    <!-- Team Column -->
+    <ng-container matColumnDef="team">
+      <th mat-header-cell *matHeaderCellDef> Team </th>
+      <td mat-cell *matCellDef="let element">{{element.team}} </td>
+    </ng-container>
+
+    <!-- Role Column -->
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> Role </th>
+      <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+    </ng-container>
+
+    <!-- Shift Column -->
+    <ng-container matColumnDef="shift">
+      <th mat-header-cell *matHeaderCellDef> Shift </th>
+      <td mat-cell *matCellDef="let element"> {{element.shift}} </td>
+    </ng-container>
+
+    <!-- Supervisor Column -->
+    <ng-container matColumnDef="supervisor">
+      <th mat-header-cell *matHeaderCellDef> Supervisor </th>
+      <td mat-cell *matCellDef="let element"> {{element.supervisor}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element; let i=index;">
+        <div *ngIf="!(isLoading && i===currentIndex) else loading"><i class="material-icons" aria-label="Edit"
+            (click)="editEmployeeDetails(element.name, element.email, element.phone, element.project, element.team, element.role, element.shift, element.supervisor)"
+            style="cursor:pointer">
+            edit
+          </i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="material-icons rejectIcon" data-toggle="modal"
+            data-target="#deleteModal" style="cursor:pointer">
+            delete
+          </i></div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns; let i=index;"
+      (click)="getRecord(row, i + (paginator.pageIndex * paginator.pageSize))"></tr>
+  </table>
+  <div *ngIf="isNoData && !isLoadingResults" class="alert alert-danger">
+    <p>No records found.</p>
+  </div>
+  <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
+
+<!-- Loading Spinner Template -->
+<ng-template #loading>
+  <div class="lds-dual-ring"></div>
+</ng-template>
+<ng-template #loadingResultSpinner>
+  <div class="spinner"></div>
+</ng-template>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalTitle">Confirm Profile Deletion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Are you sure you want to delete profile?</strong></p>
+        <p>All information associated to this user profile will be permanently deleted.
+          <span class="text-danger">This operation can not be undone.</span>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="deleteEmployeeDetails()" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<div id="editEmployeeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editEmployeeModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editEmployeeModalTitle">Edit Employee Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+
+            <form [formGroup]="updateEmployeeForm">
+              <div class=" form-group row">
+                <label for="updateName" class="col-sm-5 col-form-label required">Employee Name</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="updateName" formControlName="name">
+                </div>
+              </div>
+
+              <div class=" form-group row">
+                <label for="updateEmail" class="col-sm-5 col-form-label required">Email</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="updateEmail" formControlName="email">
+                </div>
+              </div>
+
+              <div class=" form-group row">
+                <label for="updateContactNumber" class="col-sm-5 col-form-label required">Contact Number</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="updateContactNumber" formControlName="phone">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="roleControlSelect" class="col-sm-5 col-form-label required">Role</label>
+                <div class="col-sm-6">
+                  <select type="text" class="form-control" id="roleControlSelect" formControlName="role">
+                    <option [value]="role" *ngFor="let role of roles">{{role}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="projectControlSelect" class="col-sm-5 col-form-label required">Project</label>
+                <div class="col-sm-6">
+                  <select type="text" class="form-control" id="projectControlSelect" formControlName="project">
+                    <option value="selectProject" disabled="disabled">---- Select Project ----</option>
+                    <option [value]="project" *ngFor="let project of projectLists">{{project}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="teamControlSelect" class="col-sm-5 col-form-label required">Team</label>
+                <div class="col-sm-6">
+                  <select type="text" class="form-control" id="teamControlSelect" formControlName="team">
+                    <option value="selectTeam" disabled="disabled">---- Select Team ----</option>
+                    <option [value]="team" *ngFor="let team of teamLists">{{team}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="shiftControlSelect" class="col-sm-5 col-form-label required">Shift Schedule</label>
+                <div class="col-sm-6">
+                  <select type="text" class="form-control" id="shiftControlSelect" formControlName="shift">
+                    <option value="selectShift" disabled="disabled">---- Select Shift ----</option>
+                    <option [value]="shift" *ngFor="let shift of shiftSchedules">{{shift}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="supervisorControlSelect" class="col-sm-5 col-form-label required">Supervisor</label>
+                <div class="col-sm-6">
+                  <select type="text" class="form-control" id="supervisorControlSelect" formControlName="supervisor">
+                    <option value="selectOptions" disabled="disabled">---- Select Supervisor ----</option>
+                    <option [value]="supervisor.ldap" *ngFor="let supervisor of supervisors">
+                      {{supervisor.name}}&nbsp;({{supervisor.ldap}})</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="updateEmployeeDetails()" data-dismiss="modal">Save
+          Changes</button>
+      </div>
+    </div>
+  </div>
+</div>

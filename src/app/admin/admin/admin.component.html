@@ -1,0 +1,52 @@
+<!--auth guard and feature module -->
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-lg-2 col-md-3 col-sm-4 d-none d-md-block bg-light sidebar" aria-orientation="vertical">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" id="employee-tab" role="tab" aria-controls="employee" aria-selected="true"
+              routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              Employee <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pending-requests-tab" data-toggle="tab" role="tab" aria-controls="pendingrequests"
+              aria-selected="false" routerLink="./pendingapprovals" routerLinkActive="active">
+              Pending Approvals
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="nav-supervisor-tab" data-toggle="tab" role="tab" aria-controls="addsupervisor"
+              aria-selected="false" routerLink="./supervisor" routerLinkActive="active">
+              Supervisor
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="nav-project-tab" data-toggle="tab" role="tab" aria-controls="addproject"
+              aria-selected="false" routerLink="./project" routerLinkActive="active">
+              Project
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="add-holidays-tab" data-toggle="tab" role="tab" aria-controls="addholidays"
+              aria-selected="false" routerLink="./holidays" routerLinkActive="active">
+              Holidays
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="add-leaves-type-tab" data-toggle="tab" role="tab" aria-controls="addleavestype"
+              aria-selected="false" routerLink="./leavestype" routerLinkActive="active">
+              Leaves Type
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main role="main" class="col-lg-10 col-md-9 col-sm-8 ml-sm-auto px-4">
+      <div class="tab-content" id="nav-tabContent">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+</div>

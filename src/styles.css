@@ -1,0 +1,137 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~node_modules/bootstrap/dist/css/bootstrap.css";
+@import "~node_modules/material-design-icons/iconfont/material-icons.css";
+
+body,
+html {
+  height: 100%;
+}
+
+.spinner {
+  border: 10px solid #dee2e6;
+  border-top: 10px solid #007bff;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 800ms linear infinite;
+  top: 45%;
+  left: 45%;
+  position: absolute;
+  margin: auto;
+  z-index: 1000;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0;
+  border: none;
+  width: 100%;
+  border-radius:0;
+}
+
+.alert-danger {
+  color: rgb(255, 0, 0, 1);
+  background-color: rgb(255, 0, 0, 0.2);
+  border-color: #f5c6cb;
+}
+
+.col-form-label.required:after {
+  color: rgb(255, 0, 0, 1);
+  content: "*";
+  position: absolute;
+  margin-left: 0.2rem;
+  top: 0.3rem;
+}
+
+.form-control.ng-invalid.ng-touched,
+.form-control.is-savedForm {
+  border-color: rgba(232, 11, 33, 1);
+}
+
+.select {
+  align-items: baseline;
+}
+
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+  padding-left: 0.5rem !important;
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  padding: 0 0.5rem;
+}
+
+.mat-header-cell {
+  color: #495057;
+  border-color: #dee2e6;
+  font-weight: 600;
+}
+
+.table thead th,
+.table td {
+  vertical-align: middle;
+}
+
+.rejectIcon {
+  color: #dc3545;
+  cursor: pointer;
+}
+
+.approveIcon {
+  color: #28a745;
+  cursor: pointer;
+}
+
+.jumbotron-admin {
+  padding: 0;
+  border-radius: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: #ffffff;
+  /* margin-left:-6.5rem; */
+}
+
+.lds-dual-ring {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 5px solid #007bff;
+  border-color: #007bff transparent #007bff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.container, .container-fluid{
+  padding-top: 5.5rem;
+}
+
+@media (max-width: 767px) {
+.container, .container-fluid {
+    padding-top: 13rem;
+  }
+}

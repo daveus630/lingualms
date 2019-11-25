@@ -1,0 +1,124 @@
+<form [formGroup]="shiftRequestForm" (ngSubmit)="onSubmit()">
+  <div class="form-group row">
+    <label for="inputEmployeeName" class="col-sm-5 col-form-label required">Employee Name</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="inputEmployeeName" formControlName="empName" readonly />
+      <div *ngIf="!!f.empName.invalid && (!!f.empName.dirty || !!f.empName.touched)" class="alert alert-danger">
+        <div *ngIf="!!f.empName.errors.required">Employee Name is required.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="inputEmail" class="col-sm-5 col-form-label required">Employee Email</label>
+    <div class="col-sm-6">
+      <input type="email" class="form-control" id="inputEmail" formControlName="empEmail" readonly />
+      <div *ngIf="!!f.empEmail.invalid && (!!f.empEmail.dirty || !!f.empEmail.touched)" class="alert alert-danger">
+        <div *ngIf="!!f.empEmail.errors.required">
+          Email Id is required.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="inputDateFrom" class="col-sm-5 col-form-label required">Shift Start Date</label>
+    <div class="col-sm-6">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="yyyy-mm-dd" formControlName="shiftStartDate"
+          #ssd="ngbDatepicker" ngbDatepicker [footerTemplate]="startFooterTemplate"
+          [ngClass]="{'is-savedForm': savedForm && f.shiftStartDate.errors}" />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="ssd.toggle()" type="button"></button>
+        </div>
+      </div>
+      <div
+        *ngIf="(!!f.shiftStartDate.invalid && savedForm) || (!!f.shiftStartDate.invalid && (!!f.shiftStartDate.dirty || !!f.shiftStartDate.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.shiftStartDate.errors.required">
+          Shift Start Date is required.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="inputDateTo" class="col-sm-5 col-form-label required">Shift End Date</label>
+    <div class="col-sm-6">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="yyyy-mm-dd" formControlName="shiftEndDate"
+          #sed="ngbDatepicker" ngbDatepicker [footerTemplate]="endFooterTemplate"
+          [ngClass]="{ 'is-savedForm': savedForm && f.shiftEndDate.errors }" />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="sed.toggle()" type="button"></button>
+        </div>
+      </div>
+      <div
+        *ngIf="(!!f.shiftEndDate.invalid && savedForm) || (!!f.shiftEndDate.invalid && (!!f.shiftEndDate.dirty || !!f.shiftEndDate.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.shiftEndDate.errors.required">
+          Shift End Date is required.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="remarksTextarea" class="col-sm-5 col-form-label required">Remarks</label>
+    <div class="col-sm-6">
+      <textarea class="form-control" id="remarksTextarea" rows="3" formControlName="remarks"
+        [ngClass]="{ 'is-savedForm': savedForm && f.remarks.errors }"></textarea>
+      <div
+        *ngIf="(!!f.remarks.invalid && savedForm) || (!!f.remarks.invalid && (!!f.remarks.dirty || !!f.remarks.touched))"
+        class="alert alert-danger">
+        <div *ngIf="!!f.remarks.errors.required">
+          Remarks is required.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-11 d-flex justify-content-end">
+      <button type="button" class="btn btn-primary bt-lg mr-2" (click)="onReset()">
+        Reset
+      </button>
+      <button type="submit" class="btn btn-primary bt-lg" [disabled]="!shiftRequestForm.valid"
+        *ngIf="!isLoading else loading">
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
+
+<!-- Loading Spinner Template -->
+<ng-template #loading>
+  <div class="lds-dual-ring"></div>
+</ng-template>
+
+<ng-template #startFooterTemplate>
+  <hr class="my-0" />
+  <button class="btn btn-primary btn-sm m-2 float-left" (click)="shiftStartDate = today; ssd.close()">
+    Today
+  </button>
+  <button class="btn btn-secondary btn-sm m-2 float-right" (click)="ssd.close()">
+    Close
+  </button>
+</ng-template>
+
+<ng-template #t let-date let-focused="focused">
+  <span class="custom-day" [class.focused]="focused" [class.faded]="isHovered(date) || isInside(date)"
+    (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+    {{ date.day }}
+  </span>
+</ng-template>
+
+<ng-template #endFooterTemplate>
+  <hr class="my-0" />
+  <button class="btn btn-primary btn-sm m-2 float-left" (click)="shiftEndDate = today; sed.close()">
+    Today
+  </button>
+  <button class="btn btn-secondary btn-sm m-2 float-right" (click)="sed.close()">
+    Close
+  </button>
+</ng-template>

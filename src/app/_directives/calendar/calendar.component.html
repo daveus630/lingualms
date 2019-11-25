@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-header">
+    <div class="month-nav">
+      <button (click)="prevMonth()" class="btn btn-primary">&lt;</button>
+      <label class="form-control">{{ currentDate.format("MMMM") }}</label>
+      <button (click)="nextMonth()" class="btn btn-primary">&gt;</button>
+    </div>
+    <div class="year-nav">
+      <button (click)="prevYear()" class="btn btn-primary">&lt;</button>
+      <label class="form-control">{{ currentDate.format("YYYY") }}</label>
+      <button (click)="nextYear()" class="btn btn-primary">&gt;</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" *ngFor="let name of dayNames">
+              {{ name }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let week of weeks" class="week">
+            <td
+              *ngFor="let day of week"
+              (click)="selectDate(day)"
+              [ngClass]="{
+                today: day.today,
+                selected: day.selected,
+                disabled: !isSelectedMonth(day.mDate)
+              }"
+            >
+              {{ day.mDate.date() }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

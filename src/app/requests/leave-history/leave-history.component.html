@@ -1,0 +1,140 @@
+<div class="jumbotron shadow-sm" *ngIf="!isLoading else loading">
+  <form [formGroup]="leaveHistoryForm">
+    <div class=" form-group row">
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="statusRadio" id="allStatusRadio" value="All"
+            (change)="getHistoryByStatus($event)" />
+          <label class=" form-check-label" for="allStatusRadio">All</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="statusRadio" id="approvedRadio" value="Approved"
+            (change)="getHistoryByStatus($event)" />
+          <label class=" form-check-label" for="approvedRadio">Approved</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="statusRadio" id="pendingRadio" value="Pending"
+            (change)="getHistoryByStatus($event)" />
+          <label class=" form-check-label" for="pendingRadio">Pending</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="statusRadio" id="rejectedRadio" value="Rejected"
+            (change)="getHistoryByStatus($event)" />
+          <label class=" form-check-label" for="rejectedRadio">Rejected</label>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" class="table table-striped mb-0">
+      <!-- Reference Column -->
+      <ng-container matColumnDef="refNumber">
+        <th mat-header-cell *matHeaderCellDef>Reference Number</th>
+        <td mat-cell *matCellDef="let element">{{ element.reqId }}</td>
+      </ng-container>
+
+      <!-- Applied Date Column -->
+      <ng-container matColumnDef="appliedDate">
+        <th mat-header-cell *matHeaderCellDef>Date Applied</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.date_applied | date: "longDate" }}
+        </td>
+      </ng-container>
+
+      <!-- No. of days Column -->
+      <ng-container matColumnDef="noOfHours">
+        <th mat-header-cell *matHeaderCellDef>Leave Hours</th>
+        <td mat-cell *matCellDef="let element">{{ element.leave_hours_count }}</td>
+      </ng-container>
+
+      <!-- Leave Title Column -->
+      <ng-container matColumnDef="leaveTitle">
+        <th mat-header-cell *matHeaderCellDef>Leave Title</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+
+      <!-- Leave Type Column -->
+      <ng-container matColumnDef="leaveType">
+        <th mat-header-cell *matHeaderCellDef>Leave Type</th>
+        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      </ng-container>
+
+      <!-- Remarks Column -->
+      <ng-container matColumnDef="remarks">
+        <th mat-header-cell *matHeaderCellDef>Remarks</th>
+        <td mat-cell *matCellDef="let element">{{ element.remarks }}</td>
+      </ng-container>
+
+      <!-- Approved / Rejected By Column -->
+      <ng-container matColumnDef="approvedBy">
+        <th mat-header-cell *matHeaderCellDef>Actioned By</th>
+        <td mat-cell *matCellDef="let element">{{ element.approved_by }}</td>
+      </ng-container>
+
+      <!-- Actioned On Column -->
+      <ng-container matColumnDef="actionedOn">
+        <th mat-header-cell *matHeaderCellDef>Actioned On</th>
+        <td mat-cell *matCellDef="let element">{{ element.actioned_on }}</td>
+      </ng-container>
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element; index as i;">
+          <div *ngIf="element.isFutureDate"><i class="material-icons rejectIcon" aria-label="cancel" data-toggle="modal"
+              data-target="#cancelLeaveModal">close </i> </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i= index;"
+        (click)="getRecord(row, i + (paginator.pageIndex * paginator.pageSize))"></tr>
+    </table>
+    <div *ngIf="isNoData" class="alert alert-danger">
+      <p>No records found.</p>
+    </div>
+    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>
+
+<!-- Loading Spinner Template -->
+<ng-template #loading>
+  <div class="d-flex justify-content-center">
+    <div class="lds-dual-ring"></div>
+  </div>
+</ng-template>
+
+<!-- Cancel Leave Modal -->
+<div class="modal fade" id="cancelLeaveModal" tabindex="-1" role="dialog" aria-labelledby="cancelLeaveModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cancelLeaveModalTitle">Confirm Leave Request Cancellation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Are you sure you want to cancel leave request?</strong><br>
+          <span class="text-danger">This operation can not be undone.</span>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="cancelLeaveRequest()" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

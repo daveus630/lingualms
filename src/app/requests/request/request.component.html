@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <form [formGroup]="requestForm">
+        <div class="form-group row">
+          <label for="requestTypeControlSelect" class="col-sm-5 col-form-label required">Request For</label>
+          <div class="col-sm-6">
+            <select class="form-control" id="requestTypeControlSelect" formControlName="requestType"
+              (change)="onChangeRequest($event.target.value)">
+              <option value="selectRequest" disabled="disabled">----Select Request----</option>
+              <option [value]="requestType" *ngFor="let requestType of requestTypes">{{ requestType }}</option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <app-shift-change-request *ngIf="shiftRequest"></app-shift-change-request>
+      <app-leave-request *ngIf="leaveRequest"></app-leave-request>
+    </div>
+  </div>
+</div>

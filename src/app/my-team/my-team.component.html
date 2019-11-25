@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="accordion" id="myTeamAccordion" role="tablist" *ngIf="!isLoadingResults else loadingResultSpinner">
+    <div class="card shadow-sm" *ngFor="let project of projectLists; index as i">
+      <div class="card-header" id="heading{{i}}">
+        <h5 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" attr.data-target="#collapse{{i}}"
+            attr.aria-expanded="{{i}}==0?'true':'false'" attr.aria-controls="collapse{{i}}">
+            {{project.name}}
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapse{{i}}" class="collapse" attr.aria-labelledby="heading{{i}}" data-parent="#myTeamAccordion">
+        <div class="card-body">
+          <form #calendarForm="ngForm">
+            <div class="form-group row">
+              <label for="monthControlSelect" class="col col-form-label">Month</label>
+              <div class="col">
+                <select class="form-control" id="monthControlSelect" [(ngModel)]="currentMonth" name="month"
+                  (ngModelChange)="onSelect($event)">
+                  <option [value]="month" *ngFor="let month of monthArr">{{month}}</option>
+                </select>
+              </div>
+              <label for="yearControlSelect" class="col-offset-2 col col-form-label">Year</label>
+              <div class="col">
+                <select class="form-control" id="yearControlSelect" [(ngModel)]="currentYear" name="year"
+                  (ngModelChange)="onSelect($event)">
+                  <option [value]="year" *ngFor="let year of yearsArr">{{year}}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+          <div class="table-responsive">
+            <table class="table table-sm table-bordered" id="empTable">
+              <colgroup span="2"></colgroup>
+              <colgroup span="2"></colgroup>
+              <thead>
+                <tr>
+                  <th rowspan="3" style="background-color:#f5a739">Employee Name (ldap@)</th>
+                  <th [attr.colspan]="noOfDays" scope="colgroup" class="cal-header">
+                    {{currentMonth}}&nbsp;&nbsp;&nbsp;{{currentYear}}</th>
+                </tr>
+                <tr>
+                  <th scope="col" *ngFor="let element of actualData" style="text-align:center;">{{element.dd}}</th>
+                </tr>
+                <tr>
+                  <th scope="col" *ngFor="let element of actualData" [ngStyle]="dayBgColor(element.daysOfWeek)">
+                    {{element.daysOfWeek}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let obj of getEmpData(project.name)">
+                  <td scope="row" nowrap>{{obj.name}} ({{obj.id}}@)</td>
+                  <td *ngFor="let element of obj.getCalendar()" [ngStyle]="getBgColor(element.daysOfWeek, element.dd)">
+                    {{
+                    element.dd }}</td>
+                </tr>
+                <!-- <tr>
+                <th scope="row" nowrap>Total</th>
+                <td *ngFor="let count of wCount">{{count.wcount}}</td>
+              </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading Spinner Template -->
+<ng-template #loadingResultSpinner>
+  <div class="spinner"></div>
+</ng-template>

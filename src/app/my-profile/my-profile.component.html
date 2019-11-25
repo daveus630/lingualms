@@ -1,0 +1,80 @@
+<div class="container" *ngIf="!isLoadingResults else loadingResultSpinner">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">User Information</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <img src={{authService.image}} class="rounded-circle" alt="Profile Image" width="100" height="100">
+          </div>
+          <div class="col border-left">
+            <ul class="list-unstyled text-small">
+              <li>
+                <h6>{{profileData.name}}</h6>
+              </li>
+              <li>Project: {{profileData.project}}</li>
+              <li>Team: {{profileData.team}}</li>
+              <li>Supervisor: {{profileData.supervisor}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a routerLink="/gtech/requests" class="btn btn-outline-primary">Apply Leave</a>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Available Leaves</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-left">Vacation Leaves</p>
+          </div>
+          <div class="col">
+            <ngb-progressbar type="success" [value]="leftVLpercent" [striped]="true" [animated]="true">
+            </ngb-progressbar>
+          </div>
+          <div class="col"><small [ngClass]="{'text-danger': leftVL === 0}">{{leftVL}} hours left</small></div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-left">Sick Leaves</p>
+          </div>
+          <div class="col">
+            <ngb-progressbar type="primary" [value]="leftSLpercent" [striped]="true" [animated]="true">
+            </ngb-progressbar>
+          </div>
+          <div class="col"><small [ngClass]="{'text-danger': leftSL === 0}">{{leftSL}} hours left</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-leave-history></app-leave-history>
+  <footer class="pt-2 pt-md-3 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+        <img class="mb-2" src="../assets/images/gTech_logo.png" alt="comapany logo" width="60" height="60">
+        <small class="d-block text-dark mb-3 text-muted">&copy; 2019-2025 Accenture AOG Support Team. All rights
+          reserved.</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="text-muted" href="#">Team</a></li>
+          <li><a class="text-muted" href="#">Locations</a></li>
+          <li><a class="text-muted" href="#">Privacy</a></li>
+          <li><a class="text-muted" href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Loading Spinner Template -->
+<ng-template #loadingResultSpinner>
+  <div class="spinner"></div>
+</ng-template>
