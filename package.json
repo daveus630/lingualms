@@ -29,7 +29,7 @@
     "firebase": "^5.9.0",
     "firebaseui": "^3.5.2",
     "firebaseui-angular": "^3.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "material-design-icons": "^3.0.1",
     "moment": "^2.23.0",
     "rxjs": "~6.2.0",
