@@ -31,7 +31,7 @@
     "firebaseui-angular": "^3.4.1",
     "jquery": "^3.4.1",
     "material-design-icons": "^3.0.1",
-    "moment": "^2.23.0",
+    "moment": "^2.29.2",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },
